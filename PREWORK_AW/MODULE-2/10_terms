@@ -1,0 +1,11 @@
+Terms:
+PHP -- PHP is an HTML-embedded Web scripting language. This means PHP code can be inserted into the HTML of a Web page. ... A lot of the syntax of PHP is borrowed from other languages such as C, Java and Perl
+SQL -- a standardized programming language used for managing relational databases and performing various operations on the data in them
+Wordpress -- a free and open-source content management system (CMS) based on PHP and MySQL. WordPress is installed on a web server that is either part of an Internet hosting service or a network host in its own right
+API -- Application program interface (API) is a set of routines, protocols, and tools for building software applications. An API specifies how software components should interact. Additionally, APIs are used when programming graphical user interface (GUI) components.
+Sass -- Sass is a scripting language that is interpreted into Cascading Style Sheets (CSS). SassScript is the scripting language itself. Sass consists of two syntaxes.
+LAMP Stack -- Short for Linux, Apache, MySQL and PHP,
+AJAX -- a set of Web development techniques using many Web technologies on the client side to create asynchronous Web applications. ... Ajax is not a single technology, but rather a group of technologies.
+RestFUL API-- is based on representational state transfer (REST) technology, an architectural style and approach to communications often used in web services development
+Angular -- a JavaScript-based open-source front-end web application framework mainly maintained by Google and by a community of individuals and corporations to address many of the challenges encountered in developing single-page applications.
+Mongo DB -- an open source database that uses a document-oriented data model. ... Instead of using tables and rows as in relational databases, MongoDB is built on an architecture of collections and documents. Documents comprise sets of key-value pairs and are the basic unit of data in MongoDB.

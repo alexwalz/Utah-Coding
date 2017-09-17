@@ -1,0 +1,14 @@
+shareable link: https://scratch.mit.edu/projects/166784199/
+
+Project plan:
+
+variables: puff / bomb / score
+    -need to be able to create a random location after being touched
+    -kill the script when the bomb is touched
+    -score will change each time the puff is touched by the main character
+    -bomb score will change each time the bomb is touched by the main character
+
+if/else statements
+  -the entire thing will be in one giant if/else statement due to the score
+  if the bomb score < 1 -- run the rest of the scrip
+    else "You Lose"

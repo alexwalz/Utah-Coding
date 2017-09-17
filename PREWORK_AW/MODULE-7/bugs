@@ -1,0 +1,9 @@
+issues that were found:
+
+improper ordering of content on HTML page
+extra div tags
+improper closing of div tags
+wrong color id's used
+wrong name linking to JS file
+not using quotation marks to indicate that the array was using strings instead of variables
+title was not surrounded in an H1 tag

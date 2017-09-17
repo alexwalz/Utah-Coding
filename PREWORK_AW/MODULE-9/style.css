@@ -1,0 +1,40 @@
+.bold{
+	font-weight: bold;
+}
+
+.red{
+	color:red;
+}
+
+.blue {
+	color: blue;
+}
+
+.green {
+	color: green;
+}
+
+.orange {
+	color: orange;
+}
+
+.large-text{
+	font-size: 35px;
+}
+
+.small-text{
+	font-size: 8px;
+}
+
+.center{
+	text-align: center;
+
+}
+
+.font-change{
+	font-family: cursive;
+}
+
+#styledImage{
+	border: 6px solid orange;
+}
