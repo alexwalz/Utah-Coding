@@ -1,0 +1,7 @@
+.hover a:hover {
+    color: red;
+}
+
+.hover a:visited: {
+    color: blue;
+}
