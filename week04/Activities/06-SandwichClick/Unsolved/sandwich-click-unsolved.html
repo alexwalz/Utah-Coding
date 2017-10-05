@@ -2,49 +2,84 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <title>Trigger Clicked</title>
+    <meta charset="UTF-8">
+    <title>Trigger Clicked</title>
 
-  <!-- Added link to the jQuery Library -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Added link to the jQuery Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 </head>
 
 <body>
 
-  <h1>Click to Eat Sandwich</h1>
-  <h3 id="pbj">Peanut Butter Jelly</h3>
-  <h3 id="grilledcheese">Grilled Cheese</h3>
-  <h3 id="roastbeef">Roast Beef</h3>
+    <h1>Click to Eat Sandwich</h1>
+    <h3 id="pbj">Peanut Butter Jelly</h3>
+    <h3 id="pbjcount"></h3>
+    <h3 id="grilledcheese">Grilled Cheese</h3>
+    <h3 id="grilledcheesecount"></h3>
+    <h3 id="roastBeef">Roast Beef</h3>
+    <h3 id="roastbeefcount"></h3>
 
-  <script type="text/javascript">
+    <script type="text/javascript">
+        // This document.ready isn't necessary in this example... but is needed in cases where the HTML is complex.
+        // This code makes sure that the JavaScript doesn't get run until the HTML is finished loading
+        // It's useful to become familiar with now.
 
-    // This document.ready isn't necessary in this example... but is needed in cases where the HTML is complex.
-    // This code makes sure that the JavaScript doesn't get run until the HTML is finished loading
-    // It's useful to become familiar with now.
+        $(document).ready(function() {
 
-    $(document).ready(function() {
+            // VARIABLES
+            // ====================================================================
+            // Here we create variables for tracking the number of sandwiches eaten
+            // ...
 
-      // VARIABLES
-      // ====================================================================
-      // Here we create variables for tracking the number of sandwiches eaten
-      // ...
-
-
-      // ...
-
-      // FUNCTIONS
-      // ====================================================================
-      // Here we create various on "click" functions which capture the clicks
-      // Inside each click event is the code to create an alert, update the counter, then show the updated count.
-      // ...
+            var pbjEaten = 0;
+            var grilledCheese = 0;
+            var roastBeef = 0;
 
 
-      // ...
 
-    });
+            // ...
 
-</script>
+            // FUNCTIONS
+            // ====================================================================
+            // Here we create various on "click" functions which capture the clicks
+            // Inside each click event is the code to create an alert, update the counter, then show the updated count.
+            // ...
+
+
+            // ...
+
+            $("#pbjcount").html(pbjEaten)
+            $("#grilledcheesecount").text(grilledCheese)
+            $("#roastbeefcount").text(roastBeef)
+
+
+            $("#pbj").on("click", function() {
+                $("#pbjcount").html(pbjEaten)
+                alert("You have eaten " + pbjEaten + " Peanutbutter and Jelly sandwhiches!")
+                pbjEaten++;
+                console.log(pbjEaten)
+
+            });
+
+            $("#grilledcheese").on("click", function() {
+                $("#grilledcheesecount").text(grilledCheese)
+                grilledCheese++;
+                console.log(grilledCheese)
+                alert("You have eaten " + grilledCheese + " Grilled Cheese sandwhiches!")
+            });
+
+            $("#roastBeef").on("click", function() {
+                $("#roastbeefcount").text(roastBeef)
+                roastBeef++;
+                console.log(roastBeef)
+                alert("You have eaten " + roastBeef + " Roast beef sandwhiches!")
+            });
+
+
+
+        });
+    </script>
 
 </body>
 

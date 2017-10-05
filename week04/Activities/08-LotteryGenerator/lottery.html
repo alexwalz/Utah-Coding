@@ -39,16 +39,19 @@
 
             var minNumber = 1;
             var maxNumber = 1000;
+
             // ...
 
             $("#random-button").on("click", function() {
 
                 var randomNumber = randomNumberFromRange(minNumber, maxNumber);
+                var newDiv = $("<div>")
 
                 function randomNumberFromRange(min, max) {
                     return Math.floor(Math.random() * (max - min + 1) + min);
                 }
-                $("#random-button").text(randomNumber);
+                $("#random-button").append(newDiv);
+                $("#newDiv").text(randomNumber);
 
 
             });
