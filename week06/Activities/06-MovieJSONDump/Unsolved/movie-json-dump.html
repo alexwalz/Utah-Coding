@@ -2,55 +2,57 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <title>Favorite Movies</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <title>Favorite Movies</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 </head>
 
 <body>
-  <div class="container">
-    <h1>Movie Search</h1>
+    <div class="container">
+        <h1>Movie Search</h1>
 
-    <!-- We'll be dumping our JSON contents in here -->
-    <div id="movie-view"></div>
 
-    <!-- This form will be where users input data about the movies -->
-    <form id="movie-form">
-      <label for="movie-input">Search for a movie</label>
-      <input type="text" id="movie-input"><br>
+        <div id="movie-view"></div>
 
-      <!-- This button will trigger our AJAX call -->
-      <input id="find-movie" type="submit" value="Movie Search">
-    </form>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript">
-      // This .on("click") function will trigger the AJAX Call
-      $("#find-movie").on("click", function(event) {
+        <form id="movie-form">
+            <label for="movie-input">Search for a movie</label>
+            <input type="text" id="movie-input"><br>
 
-        // Preventing the submit button from trying to submit the form
-        // We're optionally using a form so the user may hit Enter to search instead of clicking the button
-        event.preventDefault();
+            <!-- This button will trigger our AJAX call -->
+            <input id="find-movie" type="submit" value="Movie Search">
+        </form>
 
-        // Here we grab the text from the input box
-        var movie = $("#movie-input").val();
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script type="text/javascript">
+            $("#find-movie").on("click", function(event) {
+                event.preventDefault();
+                var movie = $("#movie-input").val();
+                var queryURL = "https://www.omdbapi.com/?t=" + movie + "&y=&plot=short&apikey=40e9cece";
 
-        // Here we construct our URL
-        var queryURL = "https://www.omdbapi.com/?t=" + movie + "&y=&plot=short&apikey=40e9cece";
 
-        // Write code between the dashes below to hit the queryURL with $ajax, then take the response data
-        // and display it in the div with an id of movie-view
+                $.ajax({
+                    url: queryURL,
+                    method: 'GET'
+                }).done(function(response) {
+                    console.log(response)
+                    title = response.Title
+                    actors = response.Actors
+                    awards = response.Awards
+                    plot = response.Plot
+                    poster = response.Poster
+                    console.log(awards)
+                    $("#movie-view").append("<h2>" + title + "</h2><hr>")
+                    $("#movie-view").append("<h4>Actors: </h4>" + "<p>" + actors + "</p>")
+                    $("#movie-view").append("<h4>Plot: </h4>" + "<p>" + plot + "</p>")
+                    $("#movie-view").append("<img src=" + poster + ">")
 
-        // YOUR CODE GOES IN THESE DASHES. DO NOT MANUALLY EDIT THE HTML ABOVE
+                });
 
-        // =================================================================
 
-        // CODE GOES HERE
-
-        // =================================================================
-      });
-    </script>
-  </div>
+            });
+        </script>
+    </div>
 </body>
 
 </html>

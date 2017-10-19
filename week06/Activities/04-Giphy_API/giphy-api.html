@@ -2,23 +2,40 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <title>Giphy API</title>
+    <meta charset="utf-8">
+    <title>Giphy API</title>
 </head>
 
 <body>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script type="text/javascript">
-    // Example queryURL for Giphy API
-    var queryURL = "https://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC";
 
-    $.ajax({
-      url: queryURL,
-      method: 'GET'
-    }).done(function(response) {
-      console.log(response);
-    });
-  </script>
+    <div id="gif"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        // Example queryURL for Giphy API
+
+        var apiKey = 'cowT5wF1taxtwE2I7j9EXmcpjyWNHpba'
+        var userEntry = prompt("Search for a Gif");
+        var queryURL = "https://api.giphy.com/v1/gifs/trending?api_key=" + apiKey; + "=" + userEntry + "&limit=25&offset=0&rating=G&lang=en"
+        var randomGif;
+        var randomGifURL;
+
+
+
+        $.ajax({
+            url: queryURL,
+            method: 'GET'
+        }).done(function(response) {
+            var number = Math.floor(Math.random() * 25) + 1
+            randomGif = response.data[number]
+            console.log(randomGif)
+            randomGifURL = randomGif.images.downsized.url
+            console.log(randomGifURL);
+            var img = $("<img>")
+            img.attr("src", randomGifURL)
+            $("#gif").html(img)
+
+        });
+    </script>
 
 </body>
 
