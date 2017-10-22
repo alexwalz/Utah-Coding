@@ -4,80 +4,64 @@
 <head>
     <meta charset="utf-8">
     <title>Favorite Movies</title>
-    <style type="text/css">
-        button,
-        div,
-        form,
-        input {
-            margin: 10px;
-        }
+    <style></style>
     </style>
 </head>
 
 <body>
 
-    <div class="container">
-        <h1>Movie Search</h1>
 
-        <!-- Rendered Buttons will get Dumped Here  -->
-        <div id="buttons-view"></div>
-
-        <form id="movie-form">
-            <label for="movie-input">Add a Movie Bro</label>
-            <input type="text" id="movie-input"><br>
-
-            <!-- Button triggers new movie to be added -->
-            <input id="add-movie" type="submit" value="Add a Movie Bro">
-        </form>
-
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script type="text/javascript">
-            // Initial array of movies
-            var movies = ["The Matrix", "The Notebook", "Mr. Nobody", "The Lion King"];
-
-            // Generic function for capturing the movie name from the data-attribute
-            function alertMovieName() {
-
-                var movieName = $(this).data("name")
-                console.log(movieName)
-
-            }
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $('SEARCHBUTTON').on('click', searchArticle)
+        var resetClone = $("#search-section").clone()
 
 
-            function renderButtons() {
-                $("#buttons-view").empty();
-                for (var i = 0; i < movies.length; i++) {
-                    var a = $("<button>");
-                    a.addClass("movie");
-                    a.attr("data-name", movies[i]);
-                    a.text(movies[i]);
-                    $("#buttons-view").append(a);
-                }
-            }
+        function reset() {
+            $("#search-section").replaceWith(resetClone)
+                //change search queries back to default
+        }
 
-            $("#add-movie").on("click", function(event) {
-                event.preventDefault();
+        function searchArticle() {
+            var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
+            //var query = $('SEARCH').val(),//SEARCH TERM
+            //startYear = $('startYEAR').val() + '0101', //yyyymmdd
+            //endYear = $('endYEAR').val() + '0101';  //yyyymmdd
 
-                var movie = $("#movie-input").val().trim();
-
-                // The movie from the textbox is then added to our array
-                movies.push(movie);
-
-                // Calling renderButtons which handles the processing of our movie array
-                renderButtons();
+            url += '?' + $.param({
+                'api-key': "3323848ed9614596820a21976e9d15af",
+                'q': 'University of Utah',
+                'begin_date': '20160101', // yyyymmdd
+                'end_date': '20170101',
+                'sort': "newest",
+                'hi': 'true',
+                'page': 1
             });
 
-            // Function for displaying the movie info
-            // We're adding a click event listener to all elements with the class "movie"
-            // We're adding the event listener to the document itself because it will
-            // work for dynamically generated elements
-            // $(".movies").on("click") will only add listeners to elements that are on the page at that time
-            $(document).on("click", ".movie", alertMovieName);
+            $.ajax({
+                url: url,
+                method: 'GET',
+            }).done(function(data) {
+                var result = data.response
+                $(result).each(function(i, val) {
+                    var newsItem = val.docs;
+                    $(newsItem).each(function(i2, val2) {
+                        var d = val2
 
-            // Calling the renderButtons function to display the intial buttons
-            renderButtons();
-        </script>
-    </div>
+                        console.log(d)
+
+                        $('#dummytext').append('<h2 class="smith">' + d.headline.main + "</h2><h4>" + d.byline.original + "</h4>")
+
+                    })
+                })
+            }).fail(function(err) {
+                throw err;
+            });
+
+        }
+        searchArticle()
+    </script>
+
 </body>
 
 </html>

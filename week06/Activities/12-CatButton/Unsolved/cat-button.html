@@ -2,46 +2,46 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <title>The Magical Cat Button</title>
+    <meta charset="utf-8">
+    <title>The Magical Cat Button</title>
 </head>
 
 <body>
-  <button id="cat-button">magical cat button</button>
-  <div id="images">
-  </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script type="text/javascript">
-    //
-    $("#cat-button").on("click", function() {
+    <button id="cat-button">magical cat button</button>
+    <div id="images">
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        //on click event that runs a big function
+        $("#cat-button").on("click", function() {
 
-      //
-      var queryURL = "https://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=cats";
+            //sets the URL that we are using to get a response from the Giphy API
+            var queryURL = "https://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=cats";
 
-      //
-      $.ajax({
-        url: queryURL,
-        method: "GET"
-      })
+            //sets the giphy api paramaters
+            $.ajax({
+                url: queryURL,
+                method: "GET"
+            })
 
-      //
-      .done(function(response) {
+            //Takes the information that we get back from the Giphy API and throws it into a response
+            .done(function(response) {
 
-        //
-        var imageUrl = response.data.image_original_url;
+                //sets the images URL as the value of 'image_original_url' inside of the data property that is part of the response.
+                var imageUrl = response.data.image_original_url;
 
-        //
-        var catImage = $("<img>");
+                // creates a new image element and stores it to the variable of 'catImage'
+                var catImage = $("<img>");
 
-        //
-        catImage.attr("src", imageUrl);
-        catImage.attr("alt", "cat image");
+                //adds a src attribute that is equal to the imageURL that we defined above as well as a alt attribute that is equal to the string of 'cat image'
+                catImage.attr("src", imageUrl);
+                catImage.attr("alt", "cat image");
 
-        //
-        $("#images").prepend(catImage);
-      });
-    });
-  </script>
+                //adds 'catImage' to the beginning of the div id 'images'
+                $("#images").prepend(catImage);
+            });
+        });
+    </script>
 </body>
 
 </html>
