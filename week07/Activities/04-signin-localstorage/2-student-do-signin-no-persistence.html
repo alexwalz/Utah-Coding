@@ -86,13 +86,26 @@
             var age = $("#age-input").val();
             var comment = $("#comment-input").val();
 
+
+            localStorage.clear();
+
+            localStorage.setItem("name", name);
+            localStorage.setItem("email", email);
+            localStorage.setItem("age", age);
+            localStorage.setItem("comment", comment);
+
+
             $("#name-display").text(name)
             $("#email-display").text(email)
             $("#age-display").text(age)
             $("#comment-display").text(comment)
 
-
         });
+
+        $("#name-display").text(localStorage.getItem("name"));
+        $("#email-display").text(localStorage.getItem("email"));
+        $("#age-display").text(localStorage.getItem("age"));
+        $("#comment-display").text(localStorage.getItem("comment"));
     </script>
 
 </body>
