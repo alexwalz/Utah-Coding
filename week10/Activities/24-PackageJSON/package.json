@@ -1,20 +1,18 @@
 {
-  "name": "weatherdest",
+  "name": "24-packagejson",
   "version": "1.0.0",
-  "description": "This application will gather weather data and address information for any landmark or location.",
-  "main": "server.js",
+  "description": "## File",
+  "main": "weatherdest.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "Weather",
-    "Zip",
-    "Geocoding"
+    "none"
   ],
-  "author": "Ahmed Haque",
+  "author": "",
   "license": "ISC",
   "dependencies": {
-    "geocoder": "^0.2.2",
-    "weather-js": "^1.0.2"
+    "geocoder": "^0.2.3",
+    "weather-js": "^2.0.0"
   }
 }
