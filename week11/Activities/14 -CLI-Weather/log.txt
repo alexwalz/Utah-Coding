@@ -1,4 +1,1 @@
-alex,Salt Lake City
-kurt,Salt Lake City
-q,New York
-kurt,New York City
+alex,new york city,1512015588070

@@ -5,11 +5,11 @@ var userSearch = require("./userSearch.js")
 var adminSearch = require("./weatherAdmin.js")
 
 var user = new userSearch(name,location)
-var admin = new adminSearch(name,location)
+var admin = new adminSearch()
 
 
 if( name === "admin"){
     admin.getData()
 }else{
-    user.getWeather()
+    user.getWeather(name, location)
 }

@@ -6,7 +6,7 @@ function userInfo(name, location) {
         this.name = name;
         this.location = location;
         this.date = Date.now()
-        var logInfo = name + "," + location +"\n"
+        var logInfo = name + "," + location + "," + this.date+"\n"
 
         this.getWeather = function () {
             weather.find({search: location, degreeType: 'F'}, function(err, result) {
