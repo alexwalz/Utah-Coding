@@ -91,7 +91,7 @@ var askQuestion = function () {
         });
     } else {
         runGame()
-    }
+    } 
 };
 
 askQuestion();
@@ -104,9 +104,12 @@ function runGame() {
     var randomDefense = Math.floor(Math.random() * 50) + 1
     var teamScore = 0;
     var counter = 0
+    var start = true;
 
     while (counter < 5) {
 
+        if(start){
+            start = false;
         for (var x = 0; x < starterArray.length; x++) {
 
             var offensiveRating = parseInt(starterArray[x].offense)
@@ -125,29 +128,42 @@ function runGame() {
             teamScore--
         }
 
-        inquirer
-        .prompt([
-          // Here we create a basic text prompt.
-          {
-            type: "list",
-            message: "Do you want to substitue?",
-            choices: ["yes", "no"],
-            name: "sub"
-          },
-        ])
-        .then(function(inquirerResponse) {
-          // If the inquirerResponse confirms, we displays the inquirerResponse's username and pokemon from the answers.
-          if (inquirerResponse.sub === "yes" ) {
-            console.log("YES")
-          }
-          else {
-            console.log("NO");
-          }
-        });
 
+        counter ++
 
-    console.log("FINAL TEAM SCORE",teamScore)
+        subCheck()
+
+        console.log("FINAL TEAM SCORE",teamScore)
+    }
+
 }
+}
+
+
+
+
+function subCheck() {
+    inquirer
+    .prompt([
+      // Here we create a basic text prompt.
+      {
+        type: "list",
+        message: "Do you want to substitue?",
+        choices: ["yes", "no"],
+        name: "sub"
+      }
+    ])
+    .then(function(inquirerResponse) {
+      // If the inquirerResponse confirms, we displays the inquirerResponse's username and pokemon from the answers.
+      if (inquirerResponse.sub === "yes" ) {
+        console.log("YES")
+      }
+      else {
+        console.log("NO");
+      }
+    });
+
+    start = true;
 }
 
 
