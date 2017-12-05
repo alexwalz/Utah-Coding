@@ -19,3 +19,32 @@ CREATE TABLE programming_languages(
 );
 
 -- Create new example rows
+
+
+USE programming_db;
+
+CREATE TABLE programming_languages (
+	id INTEGER(11) AUTO_INCREMENTNOT NULL,
+	languages VARCHAR(30) NOT NULL,
+	rating INTEGER,
+	mastered BOOLEAN DEFAULT true,
+	PRIMARY KEY (id)
+);
+
+
+/* SELECT * FROM favorite_foods */
+/* SELECT name FROM favorite_foods */
+
+
+
+INSERT INTO programming_languages (id, languages, rating, mastered) VALUES(default, "CSS",10, default)
+
+
+UPDATE programming_languages SET mastered = false
+WHERE id = 2
+
+UPDATE programming_languages set rating = "7"
+WHERE id= 2
+
+DELETE FROM programming_languages
+WHERE id = 4
