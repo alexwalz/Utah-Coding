@@ -4,13 +4,9 @@ var inquirer = require("inquirer");
 var connection = mysql.createConnection({
   host: "localhost",
   port: 3306,
-
-  // Your username
   user: "root",
-
-  // Your password
   password: "",
-  database: "top_songsDB"
+  database: "top5000_db"
 });
 
 connection.connect(function(err) {
@@ -22,7 +18,7 @@ function runSearch() {
   inquirer
     .prompt({
       name: "action",
-      type: "rawlist",
+      type: "list",
       message: "What would you like to do?",
       choices: [
         "Find songs by artist",
@@ -65,7 +61,7 @@ function artistSearch() {
       message: "What artist would you like to search for?"
     })
     .then(function(answer) {
-      var query = "SELECT position, song, year FROM top5000 WHERE ?";
+      var query = "SELECT position, song, year FROM topSongs WHERE ?";
       connection.query(query, { artist: answer.artist }, function(err, res) {
         for (var i = 0; i < res.length; i++) {
           console.log("Position: " + res[i].position + " || Song: " + res[i].song + " || Year: " + res[i].year);
@@ -76,7 +72,7 @@ function artistSearch() {
 }
 
 function multiSearch() {
-  var query = "SELECT artist FROM top5000 GROUP BY artist HAVING count(*) > 1";
+  var query = "SELECT artist FROM topSongs GROUP BY artist HAVING count(*) > 1";
   connection.query(query, function(err, res) {
     for (var i = 0; i < res.length; i++) {
       console.log(res[i].artist);
@@ -112,7 +108,7 @@ function rangeSearch() {
       }
     ])
     .then(function(answer) {
-      var query = "SELECT position,song,artist,year FROM top5000 WHERE position BETWEEN ? AND ?";
+      var query = "SELECT position,song,artist,year FROM topSongs WHERE position BETWEEN ? AND ?";
       connection.query(query, [answer.start, answer.end], function(err, res) {
         for (var i = 0; i < res.length; i++) {
           console.log(
@@ -140,7 +136,7 @@ function songSearch() {
     })
     .then(function(answer) {
       console.log(answer.song);
-      connection.query("SELECT * FROM top5000 WHERE ?", { song: answer.song }, function(err, res) {
+      connection.query("SELECT * FROM topSongs WHERE ?", { song: answer.song }, function(err, res) {
         console.log(
           "Position: " +
             res[0].position +
@@ -164,24 +160,24 @@ function songAndAlbumSearch() {
       message: "What artist would you like to search for?"
     })
     .then(function(answer) {
-      var query = "SELECT top_albums.year, top_albums.album, top_albums.position, top5000.song, top5000.artist ";
-      query += "FROM top_albums INNER JOIN top5000 ON (top_albums.artist = top5000.artist AND top_albums.year ";
-      query += "= top5000.year) WHERE (top_albums.artist = ? AND top5000.artist = ?) ORDER BY top_albums.year ";
+      var query = "SELECT top_albums.year, top_albums.album, top_albums.position, topSongs.song, topSongs.artist ";
+      query += "FROM top_albums INNER JOIN topSongs ON (top_albums.artist = topSongs.artist AND top_albums.year ";
+      query += "= topSongs.year) WHERE (top_albums.artist = ? AND topSongs.artist = ?) ORDER BY top_albums.year ";
 
       connection.query(query, [answer.artist, answer.artist], function(err, res) {
         console.log(res.length + " matches found!");
         for (var i = 0; i < res.length; i++) {
           console.log(
             "Album Position: " +
-              res[i].position +
-              " || Artist: " +
-              res[i].artist +
-              " || Song: " +
-              res[i].song +
-              " || Album: " +
-              res[i].album +
-              " || Year: " +
-              res[i].year
+            res[i].position +
+            " || Artist: " +
+            res[i].artist +
+            " || Song: " +
+            res[i].song +
+            " || Album: " +
+            res[i].album +
+            " || Year: " +
+            res[i].year
           );
         }
 

@@ -47,7 +47,7 @@ function updateProduct() {
         quantity: 100
       },
       {
-        flavor: "Rocky Road"
+        flavor: "Superman"
       }
     ],
     function(err, res) {

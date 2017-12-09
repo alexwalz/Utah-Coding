@@ -12,6 +12,7 @@ connection.connect( function (err){
   console.log("Connected as id", connection.threadId )
   //selectAll()
   selectRock()
+  //console.log(query.sql);  // TELLS YOU WHAT YOUR QUERY ADDRESS WAS
   connection.end();
 });
 
