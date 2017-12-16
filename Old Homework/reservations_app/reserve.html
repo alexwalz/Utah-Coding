@@ -1,0 +1,122 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Reservations</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="jumbotron text-center">
+            <h1 class="display-3"><i class="fa fa-fire" aria-hidden="true"></i>Hot Restraunt</h1>
+            <p class="lead">Make Your Reservation</p>
+            <p class="lead">
+                <a href="/tables" class="btn btn-primary btn-lg" href="#" role="button"><i class="fa fa-list-alt" aria-hidden="true"></i> View Tables</a>
+                <a href="/" class="btn btn-danger btn-lg" href="#" role="button"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                Make A Reservation
+            </div>
+            <div class="card-body">
+
+                <form role="form">
+
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="number">Phone Number</label>
+                        <input type="text" class="form-control" id="number">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" class="form-control" id="email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="uid">Unique ID</label>
+                        <input type="text" class="form-control" id="uid">
+                    </div>
+
+
+                </form>
+                <button id="submit" class="btn btn-primary submit">Submit</button>
+
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+    <br>
+    <footer>
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link active" href="/api/tables">API Tables List</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/api/waitingTables">API Waiting List</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href=""  id="clear">Clear Tables</a>
+            </li>
+        </ul>
+    </footer>
+
+
+    <script type="text/javascript">
+        $("#submit").on("click", function (event) {
+
+            event.preventDefault();
+
+            console.log("You clicked me")
+
+            var newCustomer = {
+                name: $("#name").val().trim(),
+                phone: $("#number").val().trim(),
+                email: $("#email").val().trim(),
+                uid: $("#uid").val().trim()
+            };
+
+            $.post("/api/new", newCustomer)
+                .done(function (data) {
+                    console.log(data);
+                });
+
+                location.reload();
+
+        });
+
+	function clearTable(){
+
+		var currentURL = window.location.origin;
+		$.ajax({url: currentURL + "/api/clear", method: "POST"})
+
+	}
+
+	$("#clear").on('click', function(){
+		clearTable();
+
+		location.reload();
+	})
+
+    </script>
+
+
+</body>
+
+</html>

@@ -6,6 +6,8 @@ var app = express();
 var PORT = 3000;
 
 // Data
+// ===========================================================
+
 var characters = [{
   routeName: "yoda",
   name: "Yoda",
@@ -28,18 +30,26 @@ var characters = [{
 
 // Routes
 // ===========================================================
+
+
 app.get("/", function(req, res) {
   res.send("Welcome to the Star Wars Page!");
 });
 
 app.get("/:characters", function(req, res) {
   var chosen = req.params.characters;
-
-  // What does this log?
   console.log(chosen);
-
   res.end();
 });
+
+/// Another Example 
+
+// app.get("/api/v1/:xyz", function(req, res) {
+//   var chosen = req.params.xyz;
+//   console.log(chosen);
+//   res.end();
+// });
+
 
 
 // Listener

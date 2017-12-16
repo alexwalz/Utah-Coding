@@ -60,6 +60,7 @@ app.get("/api/:characters?", function(req, res) {
 app.post("/api/new", function(req, res) {
   var newcharacter = req.body;
 
+  console.log("\nNEW CHARACTER ADDED \n")
   console.log(newcharacter);
 
   characters.push(newcharacter);

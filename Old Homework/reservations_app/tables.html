@@ -1,0 +1,114 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tables</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <div class="jumbotron text-center">
+            <h1 class="display-3"><i class="fa fa-fire" aria-hidden="true"></i>Hot Restraunt</h1>
+                <hr>
+            <p class="lead">We only have 5 tables! Book your seat before they all are gone!</p>
+            <p class="lead">
+                <a href="/reserve" class="btn btn-danger btn-lg" href="#" role="button"><i class="fa fa-credit-card-alt" aria-hidden="true"></i> Make Reservation</a>
+                <a href="/" class="btn btn-primary btn-lg" href="#" role="button"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
+            </p>
+        </div>
+
+
+        <div class="card">
+            <div class="card-header">
+                <h4>Current Reservations</h4>
+
+            </div>
+            <div class="card-body" id="current-reservations">
+
+            </div>
+        </div>
+        
+        <br>
+        <br>
+
+        <div class="card">
+            <div class="card-header">
+                <h4>Waiting List</h4>
+            </div>
+            <div class="card-body" id="waiting-list">
+
+            </div>
+        </div>
+
+    </div>
+
+    <br>
+    <footer>
+            <ul class="nav justify-content-center">
+                    <li class="nav-item">
+                      <a class="nav-link active" href="/api/tables">API Tables List</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="/api/waitingTables">API Waiting List</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="" id="clear">Clear Tables</a>
+                    </li>
+                  </ul>
+        </footer>
+
+    <script>
+
+        $.get("/api/tables",function(data){
+            console.log("OUTSIDE:", data, data.length)
+            var resNumber = 1
+            for(var i=0; i<data.length; i++){
+                console.log(data[i].name)
+                    var reservation = $("<div>")
+                    reservation.addClass("alert alert-success")
+                    reservation.attr("role", "alert")
+                    var customerInfo = resNumber + " | " + data[i].name
+                    reservation.text(customerInfo)
+                    $("#current-reservations").append(reservation)
+                resNumber++
+            }
+
+        })
+
+        $.get("/api/waitingTables",function(data){
+            var resNumber = 1
+        for(i=0; i<data.length; i++){
+                    var reservation = $("<div>")
+                    reservation.addClass("alert alert-warning")
+                    reservation.attr("role", "alert")
+                    var customerText = resNumber + " | " + data[i].name
+                    reservation.text(customerText)
+            $("#waiting-list").append(reservation)
+            resNumber++
+            }
+
+        })
+
+        function clearTable(){
+
+		var currentURL = window.location.origin;
+		$.ajax({url: currentURL + "/api/clear", method: "POST"})
+
+	}
+
+	$("#clear").on('click', function(){
+		clearTable();
+		location.reload();
+	})
+    
+    </script>
+
+
+</body>
+
+</html>

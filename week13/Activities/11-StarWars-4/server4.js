@@ -34,6 +34,7 @@ app.get("/", function(req, res) {
 });
 
 // Question mark signifies that the parameter is "optional".
+
 app.get("/api/:characters?", function(req, res) {
   // Grab the selected parameter
   var chosen = req.params.characters;
