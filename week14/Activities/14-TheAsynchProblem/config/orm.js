@@ -5,7 +5,7 @@ var orm = {
     var queryString = "SELECT * FROM ?? WHERE ?? = ?";
 
     connection.query(queryString, [tableInput, colToSearch, valOfCol], function(err, result) {
-      return result;
+      callback(result)
     });
   }
 };

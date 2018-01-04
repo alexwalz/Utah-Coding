@@ -32,6 +32,16 @@ connection.connect(function(err) {
 
 // Express and MySQL code should go here.
 
+////// ROUTING NORMAL ///////
+app.get('/', function (req, res) {
+    if (err) throw err
+    connection.query("SELECT * FROM quotes")
+    res.render("index", {
+      quotes: data,
+    })
+        
+})
+
 app.listen(port, function() {
   console.log("Listening on PORT " + port);
 });
