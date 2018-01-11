@@ -20,6 +20,7 @@ module.exports = function(app) {
     }
     // 1. Add a join here to include all of the Authors to these posts
     db.Post.findAll({
+      include: [Authors],
       where: query
     }).then(function(dbPost) {
       res.json(dbPost);
@@ -30,6 +31,7 @@ module.exports = function(app) {
   app.get("/api/posts/:id", function(req, res) {
     // 2. Add a join here to include the Author who wrote the Post
     db.Post.findOne({
+      include: [Authors],
       where: {
         id: req.params.id
       }
